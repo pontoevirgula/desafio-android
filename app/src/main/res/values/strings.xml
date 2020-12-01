@@ -2,7 +2,7 @@
     <string name="app_name">desafioConcrete</string>
     <string name="no_connection">Sem conexão</string>
     <string name="generic_error">Desculpe, algum erro aconteceu.</string>
-    <string name="message_try_again">Pressione o botão abaixo para tentar novamente.</string>
+    <string name="message_try_again">Pressione o botão abaixo ou arraste a tela pra baixo para tentar novamente .</string>
     <string name="button_refresh">Imagem de botão de refresh</string>
     <string name="user_image">Imagem do usuário</string>
     <string name="pulls_list_activity">Lista de Pulls</string>

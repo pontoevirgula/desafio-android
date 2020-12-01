@@ -15,10 +15,10 @@ import com.chsl.desafioconcrete.presentation.RepositoryPresentationContract
 import com.chsl.desafioconcrete.presentation.presenter.RepositoryPresenter
 import com.chsl.desafioconcrete.presentation.view.adapters.RepositoryListAdapter
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_repositories.*
 import kotlinx.android.synthetic.main.layout_error.*
 
-class MainActivity : BaseActivity<RepositoryPresentationContract.RepositoryListPresenter>(),
+class RepositoriesActivity : BaseActivity<RepositoryPresentationContract.RepositoryListPresenter>(),
     RepositoryPresentationContract.RepositoryListView {
 
     private val repositoryListAdapter: RepositoryListAdapter by lazy {
@@ -34,7 +34,7 @@ class MainActivity : BaseActivity<RepositoryPresentationContract.RepositoryListP
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_repositories)
         swipeRefresh()
     }
 
@@ -64,14 +64,14 @@ class MainActivity : BaseActivity<RepositoryPresentationContract.RepositoryListP
     }
 
     private fun setupAdapter() {
-        with(recycler_home) {
+        with(rvRepositories) {
             adapter = repositoryListAdapter
-            val layout = LinearLayoutManager(this@MainActivity)
+            val layout = LinearLayoutManager(this@RepositoriesActivity)
 
             addOnScrollListener(object : PaginationScroll(layout) {
                 override fun loadMoreItems() {
                     presenter?.fetchRepository(countPages++)
-                    include_layout_loading_bottom.visibility = View.VISIBLE
+                    includeRepoLoadingBottom.visibility = View.VISIBLE
                     releasedLoad = false
                 }
 
@@ -80,7 +80,7 @@ class MainActivity : BaseActivity<RepositoryPresentationContract.RepositoryListP
                 }
 
                 override fun hideMoreItems() {
-                    include_layout_loading.visibility = View.GONE
+                    includeRepoLoading.visibility = View.GONE
                 }
             })
             layoutManager = layout
@@ -94,24 +94,24 @@ class MainActivity : BaseActivity<RepositoryPresentationContract.RepositoryListP
     }
 
     override fun success() {
-        recycler_home.visibility = View.VISIBLE
-        include_layout_loading.visibility = View.GONE
-        include_layout_error.visibility = View.GONE
-        include_layout_loading_bottom.visibility = View.GONE
+        rvRepositories.visibility = View.VISIBLE
+        includeRepoLoading.visibility = View.GONE
+        includeRepoError.visibility = View.GONE
+        includeRepoLoadingBottom.visibility = View.GONE
         releasedLoad = true
     }
 
     override fun loading() {
-        include_layout_loading.visibility = View.VISIBLE
-        include_layout_loading_bottom.visibility = View.GONE
-        recycler_home.visibility = View.GONE
+        includeRepoLoading.visibility = View.VISIBLE
+        includeRepoLoadingBottom.visibility = View.GONE
+        rvRepositories.visibility = View.GONE
     }
 
     override fun error() {
-        include_layout_error.visibility = View.VISIBLE
-        include_layout_loading.visibility = View.GONE
-        include_layout_loading_bottom.visibility = View.GONE
-        recycler_home.visibility = View.GONE
+        includeRepoError.visibility = View.VISIBLE
+        includeRepoLoading.visibility = View.GONE
+        includeRepoLoadingBottom.visibility = View.GONE
+        rvRepositories.visibility = View.GONE
 
         image_refresh.setOnClickListener {
             ObjectAnimator.ofFloat(image_refresh, View.ROTATION, 0f, 360f).setDuration(300).start()

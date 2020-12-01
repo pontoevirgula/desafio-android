@@ -52,7 +52,7 @@ class PullsRequestsActivity : BaseActivity<PullsRequestsPresentationContract.Pul
         presenter?.fetchPullsRequests(creator, repo)
         pullsResponse = ArrayList()
 
-        with(recycler_pulls) {
+        with(rvPullRequests) {
             adapter = pullsRequestsAdapter
             layoutManager = LinearLayoutManager(this@PullsRequestsActivity)
         }
@@ -65,20 +65,20 @@ class PullsRequestsActivity : BaseActivity<PullsRequestsPresentationContract.Pul
     }
 
     override fun success() {
-        recycler_pulls.visibility = View.VISIBLE
-        include_pulls_loading.visibility = View.GONE
-        include_pulls_error.visibility = View.GONE
+        rvPullRequests.visibility = View.VISIBLE
+        includePullsLoading.visibility = View.GONE
+        includePullsError.visibility = View.GONE
     }
 
     override fun loading() {
-        include_pulls_loading.visibility = View.VISIBLE
-        recycler_pulls.visibility = View.GONE
+        includePullsLoading.visibility = View.VISIBLE
+        rvPullRequests.visibility = View.GONE
     }
 
     override fun error() {
-        include_pulls_error.visibility = View.VISIBLE
-        include_pulls_loading.visibility = View.GONE
-        recycler_pulls.visibility = View.GONE
+        includePullsError.visibility = View.VISIBLE
+        includePullsLoading.visibility = View.GONE
+        rvPullRequests.visibility = View.GONE
 
         image_refresh.setOnClickListener {
             ObjectAnimator.ofFloat(image_refresh, View.ROTATION, 0f, 360f).setDuration(300).start()
@@ -103,7 +103,7 @@ class PullsRequestsActivity : BaseActivity<PullsRequestsPresentationContract.Pul
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, RepositoriesActivity::class.java)
         startActivity(intent)
     }
 

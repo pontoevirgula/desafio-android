@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="visible"
-        android:id="@+id/recycler_pulls"
+        android:id="@+id/rvPullRequests"
         tools:listitem="@layout/item_data_pulls"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,11 +19,11 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <include layout="@layout/layout_error"
-        android:id="@+id/include_pulls_error"
+        android:id="@+id/includePullsError"
         android:visibility="gone"/>
 
     <include layout="@layout/progress_loading"
-        android:id="@+id/include_pulls_loading"
+        android:id="@+id/includePullsLoading"
         android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
